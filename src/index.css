@@ -14,8 +14,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: calc(15px + 0.2875vw);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
