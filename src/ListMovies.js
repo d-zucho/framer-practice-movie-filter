@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, LayoutGroup, AnimatePresence } from 'framer-motion'
 import { API } from './api'
 import Movie from './Movie'
 import Filter from './Filter'
@@ -21,6 +22,11 @@ const ListMovies = () => {
     console.log(movies.results[0])
   }
 
+  const animate = {
+    y: 200,
+    // x: 100,
+  }
+
   useEffect(() => {
     fetchPopularMovies()
   }, [])
@@ -28,20 +34,25 @@ const ListMovies = () => {
   return (
     <div className='movie-list-container'>
       <Filter
-      // popular={popular}
-      // setFiltered={setFiltered}
-      // setActiveGenre={setActiveGenre}
+        popular={popular}
+        setFiltered={setFiltered}
+        setActiveGenre={setActiveGenre}
+        activeGenre={activeGenre}
       />
-      <div className='popular-movies'>
-        {popular.map((movie) => (
-          <Movie
-            key={movie.id}
-            image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            title={movie.title}
-            description={movie.overview}
-          />
-        ))}
-      </div>
+      <AnimatePresence>
+        {/* <LayoutGroup> */}
+        <motion.div layout className='popular-movies'>
+          {filtered.map((movie) => (
+            <Movie
+              key={movie.id}
+              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              title={movie.title}
+              description={movie.overview}
+            />
+          ))}
+        </motion.div>
+        {/* </LayoutGroup> */}
+      </AnimatePresence>
     </div>
   )
 }
